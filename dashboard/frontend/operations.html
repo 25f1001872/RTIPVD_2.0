@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RTIPVD Operations Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+    <link rel="stylesheet" href="/dashboard/static/operations.css">
+</head>
+<body>
+    <main class="ops-shell">
+        <header class="ops-header">
+            <div>
+                <p class="ops-kicker">Live Operations Console</p>
+                <h1>RTIPVD Patrol Monitor</h1>
+            </div>
+            <div class="ops-header-right">
+                <p id="opsStatus">Connecting...</p>
+                <p id="opsLatency">Polling: 400ms</p>
+                <a href="/dashboard">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <section class="ops-grid">
+            <article class="quad">
+                <div class="quad-head">
+                    <h2>Q1 | Live Video Feed</h2>
+                    <p id="liveFrameMeta">No frame available</p>
+                </div>
+                <div class="quad-body frame-box">
+                    <img id="opsLiveFrame" alt="Live stream frame" hidden>
+                    <p id="opsLiveFallback">Waiting for stream packets...</p>
+                </div>
+            </article>
+
+            <article class="quad">
+                <div class="quad-head">
+                    <h2>Q2 | Patrol Position Map</h2>
+                    <p id="gpsMeta">No GPS fix yet</p>
+                </div>
+                <div id="opsMap" class="quad-body map-box"></div>
+            </article>
+
+            <article class="quad">
+                <div class="quad-head">
+                    <h2>Q3 | Plate Focus A</h2>
+                    <p id="plateATitle">Awaiting parked detection</p>
+                </div>
+                <div class="quad-body plate-box">
+                    <img id="plateAImg" alt="Primary plate crop" hidden>
+                    <p id="plateAFallback">No parked vehicle crop available.</p>
+                    <div class="plate-meta">
+                        <span id="plateAStatus">-</span>
+                        <span id="plateAGeo">-</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="quad">
+                <div class="quad-head">
+                    <h2>Q4 | Plate Focus B</h2>
+                    <p id="plateBTitle">Awaiting parked detection</p>
+                </div>
+                <div class="quad-body plate-box">
+                    <img id="plateBImg" alt="Secondary plate crop" hidden>
+                    <p id="plateBFallback">No second parked vehicle crop available.</p>
+                    <div class="plate-meta">
+                        <span id="plateBStatus">-</span>
+                        <span id="plateBGeo">-</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
+    <script src="/dashboard/static/operations.js"></script>
+</body>
+</html>

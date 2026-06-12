@@ -1,0 +1,52 @@
+# ==============================================================
+# RTIPVD — ByteTrack Tracker Configuration
+# File: config/bytetrack.yaml
+# ==============================================================
+#
+# ByteTrack is a multi-object tracking algorithm that assigns
+# persistent IDs to detected objects across frames.
+#
+# Key advantage over DeepSORT:
+#   ByteTrack uses BOTH high and low confidence detections for
+#   matching — so partially occluded vehicles (low confidence)
+#   still maintain their track IDs instead of being lost.
+#
+# Documentation: https://github.com/ifzhang/ByteTrack
+# ==============================================================
+
+tracker_type: bytetrack
+
+# --- Track Initialization ---
+# Minimum confidence to START a new track.
+# Lower = more tracks initialized (but more false positives).
+# 0.5 is conservative — only confident detections create tracks.
+track_high_thresh: 0.5
+
+# Minimum confidence for SECONDARY association.
+# ByteTrack's key innovation: it uses low-confidence detections
+# (between track_low_thresh and track_high_thresh) to match
+# existing tracks that weren't matched in the first round.
+# This prevents ID switches during partial occlusion.
+track_low_thresh: 0.1
+
+# Confidence threshold for creating brand new tracks.
+# Detections below this are ignored entirely.
+new_track_thresh: 0.6
+
+# --- Track Lifecycle ---
+# Maximum number of frames a track can be "lost" (unmatched)
+# before it is permanently deleted. Higher = more tolerant of
+# brief occlusions, but may keep ghost tracks alive too long.
+track_buffer: 30
+
+# --- Matching ---
+# IoU threshold for matching detections to existing tracks.
+# Higher = stricter matching (only very overlapping boxes match).
+# Lower = more lenient (boxes with less overlap can still match).
+match_thresh: 0.8
+
+# --- Feature ---
+# Whether to use appearance features (Re-ID) for matching.
+# false = pure IoU matching (faster, ByteTrack default)
+# true = uses appearance model (slower, more accurate for crowded scenes)
+fuse_score: true

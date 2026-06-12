@@ -1,0 +1,82 @@
+# ============ Python ============
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# ============ Virtual Environment ============
+venv/
+env/
+env311/
+myenv311/
+.venv/
+.env
+
+# ============ IDE ============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ============ Model Weights (large files) ============
+weights/*.pt
+weights/*.onnx
+weights/*.engine
+weights/*.tflite
+weights/*.pth
+
+!weights/.gitkeep
+!weights/README.md
+
+# ============ Data / Videos (large files) ============
+data/videos/*.mp4
+data/videos/*.avi
+data/videos/*.mkv
+data/dataset/images/
+data/dataset/labels/
+!data/videos/.gitkeep
+!data/sample_frames/.gitkeep
+*.mp4
+
+# ============ Output (generated at runtime) ============
+output/violations/screenshots/*
+output/violations/logs/*
+output/results/*
+output/db/*.db
+!output/**/.gitkeep
+
+# ============ OS Files ============
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============ Logs ============
+*.log
+logs/
+
+# ============ Misc ============
+*.bak
+*.tmp
+*.swp
+neuro-ar-readme.md
+
+# ============ Presentations ============
+*.pptx
+*.pdf
+presentations/
+
+# ============ Databases ============
+*.db
+*.sqlite
+*.sqlite3

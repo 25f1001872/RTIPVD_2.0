@@ -1,0 +1,236 @@
+:root {
+    --bg: #030b13;
+    --bg-2: #091728;
+    --panel: rgba(10, 24, 39, 0.88);
+    --panel-line: rgba(143, 193, 230, 0.3);
+    --text: #e5f1ff;
+    --muted: #96b7d3;
+    --accent: #59d3ff;
+    --ok: #6ce09a;
+    --warn: #ff7a66;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 18% 10%, #0f395c 0%, transparent 35%),
+        radial-gradient(circle at 85% 88%, #1e3d64 0%, transparent 44%),
+        linear-gradient(120deg, var(--bg), var(--bg-2));
+}
+
+.ops-shell {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.9rem;
+    gap: 0.8rem;
+}
+
+.ops-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.ops-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: #8fdfff;
+}
+
+.ops-header h1 {
+    margin: 0.25rem 0 0;
+    font-family: "Sora", "IBM Plex Sans", sans-serif;
+    font-size: 1.5rem;
+}
+
+.ops-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.ops-header-right p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.ops-header-right a {
+    text-decoration: none;
+    color: #032031;
+    background: linear-gradient(120deg, #52d4ff, #72e3a0);
+    font-weight: 700;
+    font-size: 0.84rem;
+    padding: 0.45rem 0.62rem;
+    border-radius: 9px;
+}
+
+.ops-grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.quad {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    border: 1px solid var(--panel-line);
+    background: var(--panel);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    overflow: hidden;
+}
+
+.quad-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem;
+    padding: 0.7rem 0.8rem;
+    border-bottom: 1px solid rgba(146, 196, 231, 0.22);
+}
+
+.quad-head h2 {
+    margin: 0;
+    font-family: "Sora", "IBM Plex Sans", sans-serif;
+    font-size: 0.96rem;
+}
+
+.quad-head p {
+    margin: 0;
+    font-size: 0.79rem;
+    color: var(--muted);
+}
+
+.quad-body {
+    flex: 1;
+    min-height: 0;
+    background: rgba(6, 16, 27, 0.65);
+}
+
+.frame-box,
+.plate-box {
+    display: grid;
+    place-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem;
+}
+
+#opsLiveFrame,
+#plateAImg,
+#plateBImg {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border: 1px solid rgba(157, 203, 235, 0.32);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+#opsLiveFrame {
+    object-fit: contain;
+    background: rgba(2, 10, 18, 0.95);
+}
+
+#plateAImg,
+#plateBImg {
+    object-fit: cover;
+}
+
+#opsLiveFallback,
+#plateAFallback,
+#plateBFallback {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.plate-meta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #c2dbef;
+}
+
+.map-box {
+    min-height: 220px;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    background: #091522;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.badge-illegal {
+    color: #ffd8d2;
+    background: rgba(255, 122, 102, 0.18);
+    border: 1px solid rgba(255, 122, 102, 0.6);
+}
+
+.badge-legal {
+    color: #d8ffe9;
+    background: rgba(108, 224, 154, 0.18);
+    border: 1px solid rgba(108, 224, 154, 0.6);
+}
+
+@media (max-width: 1080px) {
+    body {
+        overflow: auto;
+    }
+
+    .ops-shell {
+        height: auto;
+    }
+
+    .ops-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        min-height: 1200px;
+    }
+
+    .quad {
+        min-height: 280px;
+    }
+}

@@ -1,0 +1,60 @@
+# ==============================================================
+# RTIPVD — Real-Time Illegal Parking Vehicle Detection
+# Python 3.11.9 | CUDA 12.1 | NVIDIA RTX 4050
+# ==============================================================
+#
+# INSTALLATION ORDER MATTERS:
+#   1. First install PyTorch with CUDA (see instructions below)
+#   2. Then install this file: pip install -r requirements.txt
+#
+# ==============================================================
+
+# --- Core Detection & Tracking ---
+ultralytics>=8.2.0              # YOLOv8 model + ByteTrack tracker
+opencv-python>=4.9.0            # Computer vision (drawing, optical flow, HSV)
+numpy>=1.24.0,<2.0.0            # Numerical operations (numpy 2.x breaks some libs)
+
+# --- License Plate OCR ---
+easyocr>=1.7.1                  # Deep learning OCR for plate reading
+
+# --- Utilities ---
+Pillow>=10.0.0                  # Image handling (easyocr dependency)
+PyYAML>=6.0                     # YAML parsing (bytetrack.yaml config)
+tqdm>=4.65.0                    # Progress bars (ultralytics dependency)
+requests>=2.31.0                # Backend API sync from detection pipeline
+pyserial>=3.5                   # GPS serial module communication (ESP32/NEO-6M)
+flask>=3.0.0                    # Stream receiver/server endpoints
+flask-cors>=4.0.0               # Cross-origin and API compatibility
+
+# ==============================================================
+# PHASE 2 — Uncomment when implementing
+# ==============================================================
+
+# --- Database ---
+# SQLAlchemy>=2.0.0             # ORM for database operations
+# alembic>=1.13.0               # Database migrations
+
+# --- Web Dashboard ---
+# flask>=3.0.0                  # Backend API server
+# flask-cors>=4.0.0             # Cross-origin requests
+# flask-socketio>=5.3.0         # Real-time WebSocket updates
+
+# --- GPS & Maps ---
+# folium>=0.16.0                # Interactive map visualization
+# geopy>=2.4.1                  # GPS coordinate utilities
+# gpxpy>=1.6.0                  # GPX file parsing
+# pyserial>=3.5                 # Serial GPS module communication
+
+# --- Data & Reporting ---
+# pandas>=2.1.0                 # Data analysis & CSV export
+# openpyxl>=3.1.0               # Excel report generation
+# jinja2>=3.1.0                 # Report template rendering
+
+# --- Edge Deployment ---
+# onnx>=1.15.0                  # ONNX model format
+# onnxruntime-gpu>=1.17.0       # ONNX inference with GPU
+# tensorrt                      # TensorRT (Jetson only, install via NVIDIA)
+
+# --- Testing ---
+# pytest>=8.0.0                 # Unit testing framework
+# pytest-cov>=4.1.0             # Code coverage reports

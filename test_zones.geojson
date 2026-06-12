@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"zone_id": "ROAD-123", "name": "Main Street", "buffer_meters": 10.0}, "geometry": {"type": "LineString", "coordinates": [[10.0, 10.0], [10.0001, 10.0]]}}]}

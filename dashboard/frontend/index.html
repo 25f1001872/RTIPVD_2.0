@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RTIPVD Dashboard</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+	<link
+		rel="stylesheet"
+		href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+		crossorigin=""
+	>
+	<link rel="stylesheet" href="/dashboard/static/styles.css">
+</head>
+<body>
+	<div class="noise-overlay"></div>
+	<div class="bg-orb orb-a"></div>
+	<div class="bg-orb orb-b"></div>
+
+	<main class="app-shell">
+		<aside class="sidebar">
+			<div class="brand">
+				<p class="brand-kicker">RTIPVD</p>
+				<h1>Dashboard</h1>
+				<p class="brand-sub">Vehicle parking intelligence and live field visibility.</p>
+			</div>
+
+			<nav class="nav" aria-label="Primary">
+				<button type="button" class="nav-item active" data-view="overview-view">Overview</button>
+				<button type="button" class="nav-item" data-view="violations-view">Violations</button>
+				<button type="button" class="nav-item" data-view="map-view">Map View</button>
+			</nav>
+
+			<a class="ops-link" href="/operations">Open Operations Console</a>
+
+			<p class="sidebar-note">Showing all parked records with legality and calculated coordinates.</p>
+		</aside>
+
+		<section class="content">
+			<header class="topbar">
+				<div>
+					<p class="eyebrow">Control Center</p>
+					<h2 id="viewTitle">Overview</h2>
+				</div>
+				<div class="toolbar">
+					<label class="switch-row" for="autoRefresh">
+						<span>Auto refresh</span>
+						<input id="autoRefresh" type="checkbox" checked>
+					</label>
+					<button id="refreshBtn" type="button">Refresh</button>
+				</div>
+			</header>
+
+			<section id="overview-view" class="view active" aria-labelledby="viewTitle">
+				<div class="metric-grid">
+					<article class="metric-card">
+						<p>Total Parked Records</p>
+						<h3 id="metricTotal">0</h3>
+					</article>
+					<article class="metric-card">
+						<p>Detected Today</p>
+						<h3 id="metricToday">0</h3>
+					</article>
+					<article class="metric-card">
+						<p>Backend Status</p>
+						<h3 id="healthState">Checking...</h3>
+					</article>
+					<article class="metric-card">
+						<p>Live Stream</p>
+						<h3 id="streamState">Waiting...</h3>
+					</article>
+				</div>
+
+				<div class="panel-grid">
+					<article class="panel live-panel">
+						<div class="panel-head">
+							<h3>Live Thumbnail</h3>
+							<p id="liveMeta">No frame received yet</p>
+						</div>
+						<div class="thumb-stage">
+							<img id="liveThumb" alt="Latest processed frame" hidden>
+							<p id="thumbFallback">Waiting for incoming stream data...</p>
+						</div>
+					</article>
+
+					<article class="panel pulse-panel">
+						<div class="panel-head">
+							<h3>Active Parked Detections</h3>
+							<p>Latest two parked vehicles from live ops state</p>
+						</div>
+						<ul id="recentPlates" class="recent-plates"></ul>
+					</article>
+				</div>
+			</section>
+
+			<section id="violations-view" class="view" aria-labelledby="viewTitle">
+				<article class="panel table-panel">
+					<div class="table-head">
+						<div>
+							<h3>Parked Vehicles</h3>
+							<p>Includes both legally and illegally parked vehicles.</p>
+						</div>
+						<div class="table-controls">
+							<label for="statusFilter">Status</label>
+							<select id="statusFilter">
+								<option value="ALL">All</option>
+								<option value="LEGAL">Legal</option>
+								<option value="ILLEGAL">Illegal</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="table-wrap">
+						<table>
+							<thead>
+								<tr>
+									<th data-sort="id">ID</th>
+									<th data-sort="license_plate">Plate</th>
+									<th data-sort="parking_status">Illegal/Legal</th>
+									<th data-sort="zone_name">Zone</th>
+									<th data-sort="first_seen">First Seen (UTC)</th>
+									<th data-sort="last_seen">Last Seen (UTC)</th>
+									<th data-sort="duration_sec">Duration (s)</th>
+									<th data-sort="latitude">Calc Latitude</th>
+									<th data-sort="longitude">Calc Longitude</th>
+									<th>Image</th>
+								</tr>
+							</thead>
+							<tbody id="rows"></tbody>
+						</table>
+					</div>
+				</article>
+			</section>
+
+			<section id="map-view" class="view" aria-labelledby="viewTitle">
+				<article class="panel map-panel">
+					<div class="panel-head">
+						<h3>Historical Coordinate Map</h3>
+						<p id="mapMeta">No coordinates plotted yet.</p>
+					</div>
+					<div id="map" class="map-canvas"></div>
+				</article>
+			</section>
+		</section>
+	</main>
+
+	<div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true" aria-label="Violation Image Viewer">
+		<button id="lightboxClose" type="button" class="lightbox-close" aria-label="Close image viewer">Close</button>
+		<img id="lightboxImage" alt="Violation screenshot preview">
+	</div>
+
+	<script
+		src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+		crossorigin=""
+	></script>
+	<script src="/dashboard/static/app.js"></script>
+</body>
+</html>

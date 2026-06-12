@@ -1,0 +1,33 @@
+# ==============================================================
+# RTIPVD — Project Configuration
+# File: pyproject.toml
+# ==============================================================
+#
+# This file tells pip how to install the project as a package.
+# After running "pip install -e .", Python can find all modules
+# (config.config, src.detection, etc.) from anywhere.
+# ==============================================================
+
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "rtipvd"
+version = "1.0.0"
+description = "Real-Time Illegal Parking Vehicle Detection"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+    {name = "RTIPVD Team", email = "team@iitr.ac.in"},
+]
+
+[tool.setuptools.packages.find]
+# Tell setuptools to find ALL packages in these directories
+include = ["src*", "config*"]
+
+# This is critical — it tells Python where to find:
+#   config.config  →  config/config.py
+#   src.detection  →  src/detection/
+#   etc.
